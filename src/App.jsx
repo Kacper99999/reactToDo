@@ -1,16 +1,16 @@
 import { useEffect, lazy } from 'react';
 import { useDispatch } from 'react-redux';
 import { Route, Routes } from 'react-router-dom';
-import { Layout } from './Layout';
-import { PrivateRoute } from './PrivateRoute';
-import { RestrictedRoute } from './RestrictedRoute';
-import { refreshUser } from 'redux/auth/operations';
-import { useAuth } from 'hooks';
+import { MainLayout } from './components/layouts/MainLayout';
+import { PrivateRoute } from './components/route/PrivateRoute';
+import { RestrictedRoute } from './components/route/RestrictedRoute';
+import { refreshUser } from './redux/operations/auth.operations';
+import { useAuth } from './hooks';
 
-const HomePage = lazy(() => import('../pages/Home'));
-const RegisterPage = lazy(() => import('../pages/Register'));
-const LoginPage = lazy(() => import('../pages/Login'));
-const TasksPage = lazy(() => import('../pages/Tasks'));
+const HomePage = lazy(() => import('./pages/HomePage'));
+const RegisterPage = lazy(() => import('./pages/RegisterPage'));
+const LoginPage = lazy(() => import('./pages/LoginPage'));
+const TasksPage = lazy(() => import('./pages/TasksPage'));
 
 export const App = () => {
   const dispatch = useDispatch();
@@ -24,7 +24,7 @@ export const App = () => {
     <b>Refreshing user...</b>
   ) : (
     <Routes>
-      <Route path="/" element={<Layout />}>
+      <Route path="/" element={<MainLayout />}>
         <Route index element={<HomePage />} />
         <Route
           path="/register"
